@@ -1,18 +1,27 @@
-<script setup>
+<script setup lang="ts">
 
 import axios from "axios";
+import useProduct from '../composables/products';
+import emitter from 'tiny-emitter/instance';
 
-const productId = defineProps(['productId']);
+const {
+    add
+} = useProduct();
+
+const productId = defineProps<{
+    productId : number
+}>();
+
 
 const AddToCart = async () => {
 
     await axios.get('sanctum/csrf-cookie');
     await axios.get('api/user')
         .then(async () => {
-           let response = await axios.post('api/products',{
-               productId : productId
-           });
-           console.log(response);
+            let cartCount = await add(productId);
+            //package tini-emitter installer pour faciliter  la communication entre composants
+            emitter.emit('cartCountUpdated', cartCount);
+
         })
         .catch(err => {
             console.log(err);

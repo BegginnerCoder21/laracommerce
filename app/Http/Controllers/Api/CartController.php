@@ -12,9 +12,18 @@ class CartController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    public function count()
+    {
+        $count = (new CartRepository())->count();
+
+        return response()->json([
+            'count' => $count
+        ]);
+    }
     public function index()
     {
-        dd(new CartRepository());
+
     }
 
     /**
@@ -54,4 +63,6 @@ class CartController extends Controller
     {
         //
     }
+
+
 }
