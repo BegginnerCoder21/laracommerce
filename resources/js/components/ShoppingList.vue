@@ -1,19 +1,25 @@
 <script setup lang="ts">
 
 import useProduct from "../composables/products";
-import {onMounted} from "vue";
+import emitter from 'tiny-emitter/instance';
+import {onMounted, watch} from "vue";
 
 const {
     getProducts,
     shoppingProducts,
     increaseQuantity,
     decreaseQuantity,
-    destroyProduct
+    destroyProduct,
+    totalPrice
 } = useProduct();
 
 onMounted(async () => {
    await getProducts()
 });
+
+watch(totalPrice,(value) => {
+    emitter.emit('totalPriceUpdated', totalPrice.value);
+})
 
 </script>
 <template>

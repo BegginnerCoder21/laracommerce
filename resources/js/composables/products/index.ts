@@ -1,5 +1,5 @@
 import axios from "axios";
-import {ref} from "vue";
+import {computed, ref} from "vue";
 import emitter from 'tiny-emitter/instance';
 export default function useProduct(){
 
@@ -13,7 +13,7 @@ export default function useProduct(){
 
     }
 
-    const shoppingProducts = ref();
+    const shoppingProducts = ref([]);
     const cartCount = ref(0);
 
     const getProducts = async () => {
@@ -52,6 +52,12 @@ export default function useProduct(){
          emitter.emit('cartCountUpdated',cartCount.value);
     }
 
+    const totalPrice = computed(() => {
+        return Object.values(shoppingProducts.value)
+            .reduce((acc,product) => acc += product.price * product.quantity,0);
+
+    });
+
     return {
         getCount,
         add,
@@ -59,6 +65,8 @@ export default function useProduct(){
         shoppingProducts,
         increaseQuantity,
         decreaseQuantity,
-        destroyProduct
+        destroyProduct,
+        cartCount,
+        totalPrice
     }
 }
