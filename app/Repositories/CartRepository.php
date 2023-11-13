@@ -16,6 +16,7 @@ class CartRepository
             'description' => $product->description,
             'price' => $product->price,
             'quantity' => 1,
+            'associatedModel' => $product
         ));
 
         return $this->count();
@@ -29,5 +30,30 @@ class CartRepository
     public function count()
     {
         return $this->content()->sum('quantity');
+    }
+
+    public function remove($id)
+    {
+        \Cart::session(auth()->user()->id)->remove($id);
+    }
+
+    public function increase($id)
+    {
+        \Cart::session(auth()->user()->id)->update($id,[
+            'quantity' => +1
+        ]);
+    }
+
+    public function decrease($id)
+    {
+        $product = \Cart::session(auth()->user()->id)->get($id);
+        if ($product->quantity == 1){
+            $this->remove($id);
+            return;
+        }
+
+        \Cart::session(auth()->user()->id)->update($id,[
+            'quantity' => -1
+        ]);
     }
 }
