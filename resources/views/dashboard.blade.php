@@ -17,10 +17,10 @@
                                     Commande n° {{ $order->order_number }} passée le {{ $order->created_at->format('d M Y') }}
                                 </th>
                             </tr>
-                            <tr class="border-b">
-                                <th class="p-4">Nom</th>
-                                <th class="p-4">Prix</th>
-                                <th class="p-4">Quantité</th>
+                            <tr class="border-b ">
+                                <th class="p-4 text-left">Nom</th>
+                                <th class="p-4 text-left">Prix</th>
+                                <th class="p-4 text-left">Quantité</th>
                             </tr>
                             </thead>
                             <tbody>
