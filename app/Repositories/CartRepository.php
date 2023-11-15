@@ -27,6 +27,15 @@ class CartRepository
         return \Cart::session(auth()->user()->id)->getContent();
     }
 
+    public function getTotal()
+    {
+        return \Cart::session(auth()->user()->id)->getTotal();
+    }
+    public function clear()
+    {
+        \Cart::session(auth()->user()->id)->clear();
+    }
+
     public function count()
     {
         return $this->content()->sum('quantity');

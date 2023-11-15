@@ -46,7 +46,9 @@ onMounted(async () => {
             <p class="mb-1 text-lg font-bold">{{total}} fcfa</p>
           </div>
         </div>
-        <button class="mt-6 w-full rounded-md bg-blue-500 py-1.5 font-medium text-blue-50 hover:bg-blue-600">Check out</button>
+          <a href="/formpayement">
+          <button class="mt-6 w-full rounded-md bg-blue-500 py-1.5 font-medium text-blue-50 hover:bg-blue-600">Proceder au payement</button>
+          </a>
       </div>
     </div>
   </div>
