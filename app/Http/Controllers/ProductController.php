@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+
+    public function productlist()
+    {
+        return redirect(route('product.list'));
+    }
     public function index()
     {
         $products = Product::inRandomOrder()

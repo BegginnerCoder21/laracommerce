@@ -59,7 +59,7 @@ export default function useStripe(){
             case "succeeded":
                 showMessage("Payment succeeded!");
                 await orderProductSave();
-                console.log('reussi payment');
+                window.location.href = '/dashboard';
                 break;
             case "processing":
                 showMessage("Your payment is processing.");

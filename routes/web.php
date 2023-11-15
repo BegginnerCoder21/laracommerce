@@ -14,17 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [\App\Http\Controllers\ProductController::class,'productlist']);
 Route::get('products',[\App\Http\Controllers\ProductController::class,'index'])->name('product.list');
-    Route::get('formpayement',\App\Http\Controllers\STRIPE\PaymentController::class)->name('form.payment');
-Route::post('/paymentintent',[\App\Http\Controllers\STRIPE\PaymentIntentController::class,'payment'])->name('payment');
-Route::post('/orderproduct',[\App\Http\Controllers\OrderController::class,'create'])->name('order.product');
 
 Route::get('/dashboard',[\App\Http\Controllers\OrderController::class,'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    Route::get('formpayement',\App\Http\Controllers\STRIPE\PaymentController::class)->name('form.payment');
+    Route::post('/paymentintent',[\App\Http\Controllers\STRIPE\PaymentIntentController::class,'payment'])->name('payment');
+    Route::post('/orderproduct',[\App\Http\Controllers\OrderController::class,'create'])->name('order.product');
+
     Route::get('/shopping-products',[\App\Http\Controllers\ShoppingProductsController::class,'index'])->name('shopping-products');
     Route::get('/shopping-products/increase/{id}',[\App\Http\Controllers\ShoppingProductsController::class,'increase'])->name('shopping.increase');
     Route::delete('/shopping-products/destroy/{id}',[\App\Http\Controllers\ShoppingProductsController::class,'destroy'])->name('shopping.destroy');
