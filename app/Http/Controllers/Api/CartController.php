@@ -27,7 +27,6 @@ class CartController extends Controller
         $cartCount = (new CartRepository())->count();
 
         return response()->json([
-
             'products' => $products,
             'cartCount' => $cartCount
         ]);

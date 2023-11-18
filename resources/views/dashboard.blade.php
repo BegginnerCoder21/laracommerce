@@ -27,7 +27,7 @@
                             @foreach($order->products as $product)
                                 <tr class="border-b hover:bg-gray-50">
                                     <td class="p-4">{{ $product->name }}</td>
-                                    <td class="p-4">{{$product->pivot->total_price }} fcfa</td>
+                                        <td class="p-4">{{$product->pivot->total_price }} fcfa</td>
                                     <td class="p-4">{{ $product->pivot->total_quantity }}</td>
                                 </tr>
                             @endforeach

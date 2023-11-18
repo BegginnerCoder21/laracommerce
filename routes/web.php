@@ -17,9 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [\App\Http\Controllers\ProductController::class,'productlist']);
 Route::get('products',[\App\Http\Controllers\ProductController::class,'index'])->name('product.list');
 
-Route::get('/dashboard',[\App\Http\Controllers\OrderController::class,'index'])->middleware(['auth', 'verified'])->name('dashboard');
+
 
 Route::middleware('auth')->group(function () {
+    Route::get('/dashboard',[\App\Http\Controllers\OrderController::class,'index'])->middleware(['verified'])->name('dashboard');
     Route::get('formpayement',\App\Http\Controllers\STRIPE\PaymentController::class)->name('form.payment');
     Route::post('/paymentintent',[\App\Http\Controllers\STRIPE\PaymentIntentController::class,'payment'])->name('payment');
     Route::post('/orderproduct',[\App\Http\Controllers\OrderController::class,'create'])->name('order.product');
